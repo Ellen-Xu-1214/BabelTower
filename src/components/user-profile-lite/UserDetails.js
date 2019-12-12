@@ -22,9 +22,6 @@ const UserDetails = ({ userDetails }) => (
       </div>
       <h4 className="mb-0">{userDetails.name}</h4>
       <span className="text-muted d-block mb-2">{userDetails.jobTitle}</span>
-      <Button pill outline size="sm" className="mb-2">
-        <i className="material-icons mr-1">person_add</i> Follow
-      </Button>
     </CardHeader>
     <ListGroup flush>
       <ListGroupItem className="px-4">
@@ -61,10 +58,10 @@ UserDetails.propTypes = {
 
 UserDetails.defaultProps = {
   userDetails: {
-    name: "Sierra Brooks",
-    avatar: require("./../../images/avatars/0.jpg"),
-    jobTitle: "Project Manager",
-    performanceReportTitle: "Workload",
+    name: "Adam Brooks",
+    avatar: require("./../../images/avatars/2.jpg"),
+    jobTitle: "Student",
+    performanceReportTitle: "Progress",
     performanceReportValue: 74,
     metaTitle: "Description",
     metaValue:

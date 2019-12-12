@@ -1,7 +1,7 @@
 import React from "react";
-
+import ReactQuill from "react-quill";
 import PageTitle from "../components/common/PageTitle";
-import PostEditor from "../components/add-new-post/Editor";
+//import PostEditor from "../components/add-new-post/Editor";
 /* eslint jsx-a11y/anchor-is-valid: 0 */
 
 import {
@@ -12,11 +12,43 @@ import {
   CardFooter,
   Button,
   Modal,
-  Collapse
+  Collapse,
+  FormInput,
 } from "shards-react";
 
 import { Comment, Avatar, Form, List, Input } from 'antd';
 import moment from 'moment';
+import "react-quill/dist/quill.snow.css";
+import "../assets/quill.css";
+
+
+class PostEditor extends React.Component {
+  formSubmit(e){
+    e.preventDefault();    
+    let itemToAdd = this.refs.item.value;
+    if(itemToAdd != ''){
+      this.props.addItem(itemToAdd);
+      this.refs.item.value = '';
+    }
+  }
+
+  render(){
+    return(
+      <Card small className="mb-3">
+        <CardBody>
+          <Form className="add-new-post">
+            <FormInput size="lg" className="mb-3" placeholder="Your Post Title" />
+            <ReactQuill className="add-new-post__editor mb-1" />
+            <Button theme="accent">
+              <i className="material-icons">file_copy</i> Create New Post
+            </Button>
+          </Form>
+        </CardBody>
+      </Card>
+    )
+  }
+};
+
 
 const { TextArea } = Input;
 
@@ -49,6 +81,7 @@ class AddNewPost extends React.Component {
 
     this.toggle = this.toggle.bind(this);
     this.viewComments = this.viewComments.bind(this);
+    this.addListItem = this.addListItem.bind(this);
     
     this.state = {
 
@@ -78,8 +111,13 @@ class AddNewPost extends React.Component {
           date: "29 February 2019"
         },
       ],
-
     };
+  }
+
+  addListItem(itemToAdd){
+    let currentList = this.state.Posts;
+    currentList.push(itemToAdd);
+    this.setState({Posts : currentList});
   }
 
 
