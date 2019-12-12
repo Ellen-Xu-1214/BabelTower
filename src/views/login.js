@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
-//import '../semantic/dist/semantic.min.css'
+import React from 'react'
 import 'antd/dist/antd.min.css'
 import 'jquery/dist/jquery.min.js'
 import fetch from 'isomorphic-unfetch'
+
+//import { login } from '../utils/auth'
 
 class LoginForm extends React.Component {
   constructor (props) {
@@ -23,47 +24,21 @@ class LoginForm extends React.Component {
 
   async handleSubmit (event) {
     event.preventDefault();
-    const username = this.state.username;
-    const password = this.state.password;
-    const url = this.props.apiUrl+"/api/login.js";
-    console.log(url);
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password})
-      })
-      console.log(response);
-      if (response.ok) {
-        const { token } = await response.json()
-        //login({ token })
-      } else {
-        console.log('Login failed.')
-        let error = new Error(response.statusText)
-        error.response = response
-        return Promise.reject(error)
-      }
-    } catch (error) {
-      console.error(
-        'You have an error in your code or there are Network issues.',
-        error
-      )
-      throw new Error(error)
-    }
+    //this.props.history.push("/");
   }
 
   render() {
     let source;
     if (this.props.value == 0){
-      source = "../images/book.png";
+      source=<img src={require("../images/book.png")}></img>;
     }
     else{
-      source = "../images/hat.png";
+      source=<img src={require("../images/hat.png")}></img>;
     }
     return(
       <div className="login">
         <div className="header">
-          <img src={source}/>
+          {source}
           <label>Welcome back! Please login to your account!</label>
         </div>
         <form className="ui form" onSubmit={this.handleSubmit}>
@@ -78,8 +53,8 @@ class LoginForm extends React.Component {
             <div className="field">
               <button className="forgotpassword" onClick={this.props.onClick}>Forgot Password?</button>
             </div>
-            <button className="ui button" type="submit">Login</button>
-            <button className="ui button" onClick={this.props.goback} goback={this.props.goback}>Back</button>
+            <a href="/"><div className="ui button new">Login</div></a>
+            <button className="ui button new" onClick={this.props.goback} goback={this.props.goback}>Back</button>
         </form>
         <style jsx>{`
           .header img{
@@ -115,14 +90,14 @@ class LoginForm extends React.Component {
           .forgotpassword:hover{
             text-decoration: underline;
           }
-          .button{
+          .button.new{
             margin: 20px 10vw 10px 10vw;
             font-family: avenir;
             width: 10vw;
             background-color: #43425D;
             color: white;
           }
-          .button:hover{
+          .button.new:hover{
             background-color: #9796AD;
           }
         `}</style>
@@ -238,8 +213,8 @@ class ForgotPassword extends React.Component {
             <label>Email</label>
             <input type="text" name="email" placeholder="Email" />
           </div>
-            <button className="ui button" type="submit">Send Request</button>
-            <button className="ui button" onClick={this.props.goback}>Cancel</button>
+            <button className="ui button new" type="submit">Send Request</button>
+            <button className="ui button new" onClick={this.props.goback}>Cancel</button>
         </form>
         <style jsx>{`
           label{
@@ -259,14 +234,14 @@ class ForgotPassword extends React.Component {
             width:50vw;
             padding: 15vh 10vw;
           }
-          .button{
+          .button.new{
             margin: 20px 10vw 10px 10vw;
             font-family: avenir;
             width: 10vw;
             background-color: #43425D;
             color: white;
           }
-          .button:hover{
+          .button.new:hover{
             background-color: #9796AD;
           }
         `}</style>
@@ -376,8 +351,8 @@ class Register extends React.Component {
             <label>Confirm Password</label>
             <input type="password" name="confirm_password" placeholder="Confirm Password" onChange={this.handleChange} value={this.state.confirm_password}/>
           </div>
-          <button className="ui button" type="submit">Sign Up</button>
-          <button className="ui button" onClick={this.props.goback} goback={this.props.goback}>Back</button>
+          <button className="ui button new" type="submit">Sign Up</button>
+          <button className="ui button new" onClick={this.props.goback} goback={this.props.goback}>Back</button>
         </form>
         <style jsx>{`
           h1, label{
@@ -397,14 +372,14 @@ class Register extends React.Component {
             width:50vw;
             padding: 6vh 10vw;
           }
-          .button{
+          .button.new{
             margin: 20px 10vw 10px 10vw;
             font-family: avenir;
             width: 10vw;
             background-color: #43425D;
             color: white;
           }
-          .button:hover{
+          .button.new:hover{
             background-color: #9796AD;
           }
         `}</style>
@@ -433,7 +408,7 @@ class Login extends React.Component{
           <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
       </header>
       <div className = "logo">
-        <img src="../images/babel.png"></img>
+        <img src={require("../images/babel.png")}></img>
       </div>
       <div className = "form">
           <Form apiUrl = {this.props.apiUrl}/>
