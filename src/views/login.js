@@ -53,7 +53,7 @@ class LoginForm extends React.Component {
             <div className="field">
               <button className="forgotpassword" onClick={this.props.onClick}>Forgot Password?</button>
             </div>
-            <a href="/"><div className="ui button new">Login</div></a>
+            <a href="/homepage"><div className="ui button new">Login</div></a>
             <button className="ui button new" onClick={this.props.goback} goback={this.props.goback}>Back</button>
         </form>
         <style jsx>{`
